@@ -93,6 +93,18 @@ button{
   font-weight: 300;
 }
 
+/* Icon */
+.icon span {
+  font-size: 32px;
+  transition: all 0.3s ease;
+  color: #007bff;
+}
+
+.icon:hover span {
+  transform: scale(1.2) translateY(-5px);
+}
+
+
 /* nav menu */
 .nav_menu_list {
   display: flex;

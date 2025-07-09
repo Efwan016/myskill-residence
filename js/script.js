@@ -74,3 +74,11 @@ gsap.from(".fasilitas",{
     delay:1.8,
     duration:0.5,
 })
+ 
+// tentang kami
+gsap.from(".tentang",{
+    opacity:0,
+    y:20,
+    delay:1.8,
+    duration:0.5,
+})
