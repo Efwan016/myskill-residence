@@ -41,13 +41,13 @@
                         <a href="./index.html" class="nav_menu_link">Home</a>
                     </li>
                     <li class="nav_menu_item">
-                        <a href="./tipe-rumah.html" class="nav_menu_link">House Type</a>
+                        <a href="./tipe_rumah.html" class="nav_menu_link">House Type</a>
                     </li>
                     <li class="nav_menu_item">
                         <a href="./tentang.html" class="nav_menu_link">About</a>
                     </li>
                     <li class="nav_menu_item">
-                        <a href="./kontak.html" class="nav_menu_link menu_active">Kontak</a>
+                        <a href="./kontak.html" class="nav_menu_link menu_active">Contact</a>
                     </li>
                     <li class="nav_menu_item">
                         <a href="./blog.html" class="nav_menu_link">Blog</a>
@@ -195,6 +195,26 @@
         <div>Copyright &copy; E-Learning MySkill 2024</div>
     </footer>
     <!-- Footer -->
+
+    <!-- WA Pop-up Button -->
+    <div class="whatsapp-popup" id="waPopup">
+        <a href="https://wa.me/6281234567890" target="_blank">
+            <span class="wa-text">Aku Disini!</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="Chat WhatsApp" />
+        </a>
+    </div>
+    <!-- WA Pop-up Button -->
+
+
+
+
+    <script>
+        window.onload = function () {
+            setTimeout(() => {
+                document.getElementById("waPopup").style.display = "flex";
+            }, 3000);
+        };
+    </script>
 
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />

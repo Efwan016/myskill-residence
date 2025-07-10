@@ -14,23 +14,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <title>MySkill Residence - Hunian Modern Berkualitas</title>
-    <meta name="description"wa
+    <meta name="description" wa
         content="MySkill Residence menawarkan hunian modern dengan fasilitas terbaik seperti kolam renang infinity, gym, taman hijau, dan sistem keamanan 24/7.">
     <meta name="author" content="MySkill Developer Team">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Residence Project" />
-  <meta property="og:description" content="MySkill Residence Project." />
-  <meta property="og:url" content="https://myskill-residence-tau.vercel.app//" />
-  <meta property="og:image" content="https://myskill-residence-tau.vercel.app/img/H.png" />
-  <meta property="og:type" content="website" />
+    <meta property="og:title" content="Residence Project" />
+    <meta property="og:description" content="MySkill Residence Project." />
+    <meta property="og:url" content="https://myskill-residence-tau.vercel.app//" />
+    <meta property="og:image" content="https://myskill-residence-tau.vercel.app/img/H.png" />
+    <meta property="og:type" content="website" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Residence Project" />
-  <meta name="twitter:description" content="React Project My Portofolio." />
-  <meta name="twitter:image" content="https://myskill-residence-tau.vercel.app/img/H.png" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Residence Project" />
+    <meta name="twitter:description" content="React Project My Portofolio." />
+    <meta name="twitter:image" content="https://myskill-residence-tau.vercel.app/img/H.png" />
 
 
 
@@ -54,16 +54,16 @@
 
                 <ul class="nav_menu_list">
                     <li class="nav_menu_item">
-                        <a href="./index.html" class="nav_menu_link menu_active">Beranda</a>
+                        <a href="./index.html" class="nav_menu_link menu_active">Home</a>
                     </li>
                     <li class="nav_menu_item">
-                        <a href="./tipe_rumah.html" class="nav_menu_link">Tipe Rumah</a>
+                        <a href="./tipe_rumah.html" class="nav_menu_link">House Type</a>
                     </li>
                     <li class="nav_menu_item">
-                        <a href="./tentang.html" class="nav_menu_link">Tentang Kami</a>
+                        <a href="./tentang.html" class="nav_menu_link">About</a>
                     </li>
                     <li class="nav_menu_item">
-                        <a href="./kontak.html" class="nav_menu_link">Kontak</a>
+                        <a href="./kontak.html" class="nav_menu_link">Contact</a>
                     </li>
                     <li class="nav_menu_item">
                         <a href="./blog.html" class="nav_menu_link">Blog</a>
@@ -94,10 +94,10 @@
 
                     <div class="btn_wrapper">
                         <button class="btn_home view_more_btn">
-                            Kontak Kami <i class="fa fa-phone"></i>
+                            <a href="./kontak.html" class="nav_menu_link">Hubungi Kami</a><i class="fa fa-phone"></i>
                         </button>
                         <button class="btn_home documentation_btn">
-                            Info Detail
+                            <a href="./tentang.html" class="nav_menu_link">Info Detail</a>
                         </button>
                     </div>
                 </div>
@@ -186,12 +186,34 @@
     </div>
     <!-- section fasilitas -->
 
+
     <!-- Footer-->
     <br><br><br>
     <footer class="footer">
         <div>Copyright &copy; E-Learning MySkill 2024</div>
     </footer>
     <!-- Footer -->
+
+    <!-- WA Pop-up Button -->
+    <div class="whatsapp-popup" id="waPopup">
+        <a href="https://wa.me/6281234567890" target="_blank">
+            <span class="wa-text">Aku Disini!</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="Chat WhatsApp" />
+        </a>
+    </div>
+    <!-- WA Pop-up Button -->
+
+
+
+
+    <script>
+        window.onload = function () {
+            setTimeout(() => {
+                document.getElementById("waPopup").style.display = "flex";
+            }, 3000);
+        };
+    </script>
+
 
     <!-- ==== ANIMATE ON SCROLL JS CDN -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

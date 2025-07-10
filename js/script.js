@@ -1,84 +1,181 @@
+// === NAV TOGGLE === //
 const navId = document.getElementById("nav_menu"),
-ToggleBtnId = document.getElementById("toggle_btn"),
-CloseBtnId = document.getElementById("close_btn");
+  ToggleBtnId = document.getElementById("toggle_btn"),
+  CloseBtnId = document.getElementById("close_btn");
 
-// ==== SHOW MENU ==== //
-ToggleBtnId.addEventListener("click", () => {
-  navId.classList.add("show");
-});
+if (ToggleBtnId) {
+  ToggleBtnId.addEventListener("click", () => {
+    navId.classList.add("show");
+  });
+}
+if (CloseBtnId) {
+  CloseBtnId.addEventListener("click", () => {
+    navId.classList.remove("show");
+  });
+}
 
-// ==== HIDE MENU ==== //
-CloseBtnId.addEventListener("click", () => {
-  navId.classList.remove("show");
-});
-
+// === AOS === //
 AOS.init();
 
-// Logo
-gsap.from(".logo",{
-    opacity:0,
-    y:-10,
-    delay:1,
-    duration:0.5,
-})
+// === GSAP ANIMASI DENGAN CEK ELEMENT === //
+const animate = (selector, config) => {
+  if (document.querySelector(selector)) {
+    gsap.from(selector, config);
+  }
+};
 
-// nav menu
-gsap.from(".nav_menu_list .nav_menu_item",{
-    opacity:0,
-    y:-10,
-    delay:1,
-    duration:0.5,
-    stagger:0.3,
-})
+animate(".logo", { opacity: 0, y: -10, delay: 1, duration: 0.5 });
+animate(".nav_menu_list .nav_menu_item", { opacity: 0, y: -10, delay: 1, duration: 0.5, stagger: 0.3 });
+animate(".toggle_btn", { opacity: 0, y: -10, delay: 1, duration: 0.5 });
+animate(".main-heading", { opacity: 0, y: 20, delay: 2, duration: 0.5 });
+animate(".btn_wrapper", { opacity: 0, y: 20, delay: 1.8, duration: 0.5 });
+animate(".team_img_wrapper img", { opacity: 0, y: 20, delay: 1.8, duration: 0.5 });
+animate(".info-text", { opacity: 0, y: 20, delay: 1.8, duration: 0.5 });
+animate(".fasilitas", { opacity: 0, y: 20, delay: 1.8, duration: 0.5 });
+animate(".tentang", { opacity: 0, y: 20, delay: 1.8, duration: 0.5 });
+animate(".title_tipe_rumah", { opacity: 0, y: 20, delay: 1.8, duration: 0.5 });
+animate(".tipe_rumah", { opacity: 0, y: 20, delay: 1.8, duration: 0.5 });
 
-// toggle btn
-gsap.from(".toggle_btn",{
-    opacity:0,
-    y:-10,
-    delay:1,
-    duration:0.5,
-})
+// === DARK MODE TOGGLE === //
+const toggle = document.getElementById('darkModeToggle');
+const body = document.body;
 
-// main heading
-gsap.from(".main-heading",{
-    opacity:0,
-    y:20,
-    delay:2,
-    duration:0.5,
-})
+if (toggle) {
+  if (localStorage.getItem('dark-mode') === 'enabled') {
+    body.classList.add('dark-mode');
+  }
 
-// btn
-gsap.from(".btn_wrapper",{
-    opacity:0,
-    y:20,
-    delay:1.8,
-    duration:0.5,
-})
-gsap.from(".team_img_wrapper img",{
-    opacity:0,
-    y:20,
-    delay:1.8,
-    duration:0.5,
-})
+  toggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('dark-mode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+  });
+}
 
-gsap.from(".info-text",{
-    opacity:0,
-    y:20,
-    delay:1.8,
-    duration:0.5,
-})
+// LOAD ALL TYPE HOUSE
 
-gsap.from(".fasilitas",{
-    opacity:0,
-    y:20,
-    delay:1.8,
-    duration:0.5,
-})
- 
-// tentang kami
-gsap.from(".tentang",{
-    opacity:0,
-    y:20,
-    delay:1.8,
-    duration:0.5,
-})
+const jsonData = {
+  "rumah": [
+    {
+      type: "A",
+      gambar_rumah: "./img/house-1.png",
+      nama: "Case Verde",
+      luas_bangunan: 120,
+      luas_tanah: 200,
+      kamar_mandi: 2,
+      kamar_tidur: 3,
+      deskripsi: "Case Verde, Rumah dengan design modern dan luas tanah yang cukup untuk kehidupan keluarga. dengan dua kamar mandi dan tiga kamar tidur, rumah ini memberikan kenyamanan dan kehangatan bagi keluarga Anda."
+    },
+    {
+      type: "B",
+      gambar_rumah: "./img/house-2.png",
+      nama: "Sky Villa",
+      luas_bangunan: 180,
+      luas_tanah: 250,
+      kamar_mandi: 3,
+      kamar_tidur: 4,
+      deskripsi: "Sky Villa, Rumah mewah dengan pemandangan yang menakjubkan, Dengan 3 kamar mandi dan 4 kamar tidur, rumah ini adalah tempat yang sempurna untuk hidup bergaya dengan bersantai di atas langit biru."
+    },
+    {
+      type: "C",
+      gambar_rumah: "./img/house-3.png",
+      nama: "Lakeview Mansion",
+      luas_bangunan: 220,
+      luas_tanah: 300,
+      kamar_mandi: 4,
+      kamar_tidur: 5,
+      deskripsi: "Lakeview Mansion, Rumah megah dengan pemandangan danau yang menakjubkan dengan empat kamar mandi dan lima kamar tidur, rumah ini menghadirkan keagungan dan kenyamanan untuk gaya hidup bergengsi."
+    },
+    {
+      type: "D",
+      gambar_rumah: "./img/house-4.png",
+      nama: "Casa Verde",
+      luas_bangunan: 150,
+      luas_tanah: 180,
+      kamar_mandi: 2,
+      kamar_tidur: 3,
+      deskripsi: "Garden Retreat, rumah elgan dengan taman yang indah. dengan dua kamar mandi dan tiga kamar tidur, memberikan keseimbangan sempurna antara ke indahan alam dan kenyamanan rumah modern."
+    }
+  ]
+}
+//function dynamic create html for each house
+function createHouseCard(house, index, isMobileView) {
+  const isOdd = index % 2 === 1;
+
+  const penjelasan = `
+      <div class="col-md-6 mt-4 mb-4">
+        <h2>${house.nama}</h2>
+        <p>${house.deskripsi}</p>
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <div class="card justify-content-center align-self-center  p-3 tipe_rumah_item">
+              <i class="fa fa-briefcase"></i>
+              <h3>${house.luas_bangunan}</h3>
+              <p>Luas Bangunan</p>
+            </div>
+          </div>
+          <div class="col-md-5 mb-3">
+            <div class="card justify-content-center align-self-center  p-3 tipe_rumah_item">
+              <i class="fa fa-briefcase"></i>
+              <h3>${house.luas_tanah}</h3>
+              <p>Luas Tanah</p>
+            </div>
+          </div>
+          <div class="col-md-5 mb-3">
+            <div class="card justify-content-center align-self-center  p-3 tipe_rumah_item">
+              <i class="fa fa-shower"></i>
+              <h3>${house.kamar_mandi}</h3>
+              <p>Kamar Mandi</p>
+            </div>
+          </div>
+          <div class="col-md-5 mb-3">
+          <div class="card justify-content-center align-self-center  p-3 tipe_rumah_item">
+            <i class="fa fa-bed"></i>
+            <h3>${house.kamar_tidur}</h3>
+            <p>Kamar Tidur</p>
+          </div>
+        </div>
+        </div>
+        <a href="./detail_rumah.html?tipe_rumah=${house.tipe}" class="btn_home view_more_btn mt-1" style="text-decoration:none;">
+            Selengkapnya
+        </a>
+      </div>
+    `;
+
+  const gambar_rumah = `
+      <div class="col-md-6 mt-4 mb-4">
+        <img src="${house.gambar_rumah}" alt="${house.nama}" class="img-fluid" />
+    </div>
+      `;
+
+  var html = ``
+  if (isOdd) {
+    html = gambar_rumah + penjelasan;
+  } else {
+    html = penjelasan + gambar_rumah;
+  }
+
+  // handle mobile view 
+  if (isMobileView) {
+    html = gambar_rumah + penjelasan;
+  }
+
+  return html;
+
+}
+// Load data into html  web view
+const rumahContainer = document.getElementById('rumahContainer')
+if (rumahContainer != null) {
+  jsonData.rumah.forEach((house, index) => {
+    const houseCard = createHouseCard(house, index, false);
+    rumahContainer.innerHTML += houseCard;
+  })
+}
+
+// load data into mobile html view
+const rumahContainerMobile = document.getElementById('rumahContainerMobile')
+if (rumahContainerMobile != null) {
+  jsonData.rumah.forEach((house, index) => {
+    const houseCard = createHouseCard(house, index, true);
+    rumahContainerMobile.innerHTML += houseCard;
+  })
+}

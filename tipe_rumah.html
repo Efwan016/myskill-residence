@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySkill Residence</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- === ANIMATE ON SCROLL CSS ON === -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- header -->
+    <header class="header">
+      <!-- navbar -->
+      <nav class="nav">
+        <div class="logo">
+          <a href="./index.html" style="text-decoration: none;">
+            <h2>MySkill <br> <span id="black-title">Residence.</span></h2>
+          </a>
+        </div>
+
+        <div class="nav_menu" id="nav_menu">
+          <button class="close_btn" id="close_btn">
+            <i class="fa fa-arrow-right"></i>
+          </button>
+
+          <ul class="nav_menu_list">
+            <li class="nav_menu_item">
+              <a href="./index.html" class="nav_menu_link">Home</a>
+            </li>
+            <li class="nav_menu_item">
+              <a href="./tipe_rumah.html" class="nav_menu_link menu_active">House Type</a>
+            </li>
+            <li class="nav_menu_item">
+              <a href="./tentang.html" class="nav_menu_link">About</a>
+            </li>
+            <li class="nav_menu_item">
+              <a href="./kontak.html" class="nav_menu_link">Contact</a>
+            </li>
+            <li class="nav_menu_item">
+              <a href="./blog.html" class="nav_menu_link">Blog</a>
+            </li>
+          </ul>
+        </div>
+
+        <button class="toggle_btn" id="toggle_btn">
+          <i class="fa fa-bars"></i>
+        </button>
+
+      </nav>
+    </header>
+    <!-- header -->
+    
+    <section class="wrapper-content tiltle_tipe_rumah">
+        <div class="container-fluid">
+            <div class="row" id="content-title">
+                <div class="col-md-12 text-center">
+                    <h2>House Type</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container pt-4 pb-4 mt-2 mb-3 tipe_rumah">
+        <h1 class="text-center my-5">Hunian Bergaya Modern</h1>
+        <br>
+        <div class="row tipe_website_view" id="rumahContainer">
+            <!-- This Content -->
+        </div>
+        <div class=" row tipe_mobile_view" id="rumahContainerMobile">
+            <!-- This Content -->
+        </div>
+    </div>
+
+    <br><br><br>
+    <footer class="footer">
+        <div>Copyright &copy; E-Learing MySkill 2025</div>
+    </footer>
+
+    <!-- WA Pop-up Button -->
+    <div class="whatsapp-popup" id="waPopup">
+        <a href="https://wa.me/6281234567890" target="_blank">
+            <span class="wa-text">Aku Disini!</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="Chat WhatsApp" />
+        </a>
+    </div>
+    <!-- WA Pop-up Button -->
+
+
+
+
+    <script>
+        window.onload = function () {
+            setTimeout(() => {
+                document.getElementById("waPopup").style.display = "flex";
+            }, 3000);
+        };
+    </script>
+
+      <!-- ==== ANIMATE ON SCROLL JS CDN -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- ==== GSAP CDN ==== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+
+    <!-- ==== SCRIPT.JS ==== -->
+    <script src="./js/script.js" defer></script>
+</body>
+
+</html>
