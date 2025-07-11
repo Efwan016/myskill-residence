@@ -63,7 +63,10 @@ const jsonData = {
       luas_tanah: 200,
       kamar_mandi: 2,
       kamar_tidur: 3,
-      deskripsi: "Case Verde, Rumah dengan design modern dan luas tanah yang cukup untuk kehidupan keluarga. dengan dua kamar mandi dan tiga kamar tidur, rumah ini memberikan kenyamanan dan kehangatan bagi keluarga Anda."
+      deskripsi: "Case Verde, Rumah dengan design modern dan luas tanah yang cukup untuk kehidupan keluarga. dengan dua kamar mandi dan tiga kamar tidur, rumah ini memberikan kenyamanan dan kehangatan bagi keluarga Anda.",
+      harga: "700Jt-an",
+      carpot: "1",
+      denah_rumah: "./img/denah_rumah.jpg"
     },
     {
       type: "B",
@@ -73,7 +76,10 @@ const jsonData = {
       luas_tanah: 250,
       kamar_mandi: 3,
       kamar_tidur: 4,
-      deskripsi: "Sky Villa, Rumah mewah dengan pemandangan yang menakjubkan, Dengan 3 kamar mandi dan 4 kamar tidur, rumah ini adalah tempat yang sempurna untuk hidup bergaya dengan bersantai di atas langit biru."
+      deskripsi: "Sky Villa, Rumah mewah dengan pemandangan yang menakjubkan, Dengan 3 kamar mandi dan 4 kamar tidur, rumah ini adalah tempat yang sempurna untuk hidup bergaya dengan bersantai di atas langit biru.",
+      harga: "800Jt-an",
+      carpot: "1",
+      denah_rumah: "./img/denah_rumah.jpg"
     },
     {
       type: "C",
@@ -83,17 +89,23 @@ const jsonData = {
       luas_tanah: 300,
       kamar_mandi: 4,
       kamar_tidur: 5,
-      deskripsi: "Lakeview Mansion, Rumah megah dengan pemandangan danau yang menakjubkan dengan empat kamar mandi dan lima kamar tidur, rumah ini menghadirkan keagungan dan kenyamanan untuk gaya hidup bergengsi."
+      deskripsi: "Lakeview Mansion, Rumah megah dengan pemandangan danau yang menakjubkan dengan empat kamar mandi dan lima kamar tidur, rumah ini menghadirkan keagungan dan kenyamanan untuk gaya hidup bergengsi.",
+      harga: "900Jt-an",
+      carpot: "1",
+      denah_rumah: "./img/denah_rumah.jpg"
     },
     {
       type: "D",
       gambar_rumah: "./img/house-4.png",
-      nama: "Casa Verde",
+      nama: "Garden Retreat",
       luas_bangunan: 150,
       luas_tanah: 180,
       kamar_mandi: 2,
       kamar_tidur: 3,
-      deskripsi: "Garden Retreat, rumah elgan dengan taman yang indah. dengan dua kamar mandi dan tiga kamar tidur, memberikan keseimbangan sempurna antara ke indahan alam dan kenyamanan rumah modern."
+      deskripsi: "Garden Retreat, rumah elgan dengan taman yang indah. dengan dua kamar mandi dan tiga kamar tidur, memberikan keseimbangan sempurna antara ke indahan alam dan kenyamanan rumah modern.",
+      harga: "950Jt-an",
+      carpot: "1",
+      denah_rumah: "./img/denah_rumah.jpg"
     }
   ]
 }
@@ -162,6 +174,21 @@ function createHouseCard(house, index, isMobileView) {
   return html;
 
 }
+
+function createTipeLain(house) {
+  const item = `
+  <div class="col-md-6 mt-4 mb-4">
+    <img src="${house.gambar_rumah}" class="w-100" style="max-height: 200px; object-fit:cover; object-position: bottom;">
+    <br><br>
+    <a href="./detail_rumah.html?tipe_rumah=${house.type}">
+        <h3 class="text-center">Rumah ${house.nama}</h3>
+    </a>
+  </div>
+  `;
+
+  return item;
+}
+
 // Load data into html  web view
 const rumahContainer = document.getElementById('rumahContainer')
 if (rumahContainer != null) {
@@ -178,4 +205,48 @@ if (rumahContainerMobile != null) {
     const houseCard = createHouseCard(house, index, true);
     rumahContainerMobile.innerHTML += houseCard;
   })
+}
+
+// load data tipe lain
+const lihatTipeLain = document.getElementById('lihatTipeLain')
+if (lihatTipeLain != null) {
+  jsonData.rumah.forEach((house) => {
+    const tipeCard = createTipeLain(house);
+    lihatTipeLain.innerHTML += tipeCard;
+  });
+}
+
+// LOAD DERTAIL RUMAH --------
+
+function filterRumahByTipe(type) {
+  const filteredRumah = jsonData.rumah.find(rumah => rumah.type == type);
+  return filteredRumah || null;
+}
+
+var queryString = window.location.search;
+
+var searchParams = new URLSearchParams(queryString);
+
+var tipeRumahValue = searchParams.get('tipe_rumah');
+
+//LOAD DATA TO VIEW HTML
+
+if (tipeRumahValue != null && tipeRumahValue != "") {
+  const filteredRumah = filterRumahByTipe(tipeRumahValue.toUpperCase())
+
+  if (filteredRumah == null) {
+    console.log("rumah not found");
+  } else {
+    document.getElementById("title-nama-rumah").innerText = 'Rumah' + filteredRumah.nama;
+    document.getElementById("gambar-rumah").src = filteredRumah.gambar_rumah;
+    document.getElementById("nama-rumah").innerText = filteredRumah.nama;
+    document.getElementById("deskripsi-rumah").innerText = filteredRumah.deskripsi;
+    document.getElementById("harga-rumah").innerText = filteredRumah.harga;
+    document.getElementById("luas-bangunan-rumah").innerText = filteredRumah.luas_bangunan;
+    document.getElementById("luas-tanah-rumah").innerText = filteredRumah.luas - luas_tanah;
+    document.getElementById("kamar-mandi-rumah").innerText = filteredRumah.kamar_mandi;
+    document.getElementById("kamar-tidur-rumah").innerText = filteredRumah.kamar_tidur;
+    document.getElementById("carpot-rumah").innerText = filteredRumah.carpot;
+    document.getElementById("denah-rumah").src = filteredRumah.denah - rumah;
+  }
 }
