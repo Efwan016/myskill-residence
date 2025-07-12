@@ -243,10 +243,149 @@ if (tipeRumahValue != null && tipeRumahValue != "") {
     document.getElementById("deskripsi-rumah").innerText = filteredRumah.deskripsi;
     document.getElementById("harga-rumah").innerText = filteredRumah.harga;
     document.getElementById("luas-bangunan-rumah").innerText = filteredRumah.luas_bangunan;
-    document.getElementById("luas-tanah-rumah").innerText = filteredRumah.luas - luas_tanah;
+    document.getElementById("luas-tanah-rumah").innerText = filteredRumah.luas_luas_tanah;
     document.getElementById("kamar-mandi-rumah").innerText = filteredRumah.kamar_mandi;
     document.getElementById("kamar-tidur-rumah").innerText = filteredRumah.kamar_tidur;
     document.getElementById("carpot-rumah").innerText = filteredRumah.carpot;
     document.getElementById("denah-rumah").src = filteredRumah.denah - rumah;
+  }
+}
+
+// ===== BLOG DATA =====
+const blogData = [
+  {
+    id: 1,
+    title: "Perumahan dengan Hunian Nyaman dan Modern: Casa Verde di MySkill Residence",
+    date: "21 Maret 2025, 09:00 AM",
+    description:
+      "Dalam dunia properti, terutama di industri perumahan, kebutuhan akan hunian yang nyaman dan modern semakin menjadi prioritas bagi masyarakat urban. Salah satu perumahan yang menawarkan konsep tersebut adalah Myskill Residence dengan tipe hunian bernama Casa Verde...",
+    detail_blog: "./content/blog-1.html",
+    image_blog: "./img/house-1.png"
+  },
+  {
+    id: 2,
+    title: "Menikmati Kemewahan Hidup di Sky Villa: Rumah Hunian Modern dengan Pemandangan Mengagumkan",
+    date: "22 Maret 2024, 08:00 AM",
+    description:
+      "Selamat datang di Sky Villa, rumah hunian modern yang menghadirkan kemewahan dan kenyamanan di tengah-tengah pemandangan yang menakjubkan. Ini bukan sekadar tempat tinggal, tetapi sebuah pengalaman hidup bergaya dan bersantai di atas langit biru...",
+    detail_blog: "./content/blog-2.html",
+    image_blog: "./img/house-2.png"
+  }
+];
+
+// ===== GENERATE BLOG CARD =====
+function generateBlogHTML(blogPost) {
+  return `
+    <div class="card mb-4">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="${blogPost.image_blog}" alt="${blogPost.title}" width="100%" height="100%" />
+        </div>
+        <div class="col-md-8 pt-4">
+          <div>
+            <h5>${blogPost.title}</h5>
+            <div class="blog-date d-flex mt-1">
+              <i class="fa fa-calendar me-2 mt-1"></i>
+              <p>${blogPost.date}</p>
+            </div>
+            <p class="description-blog mt-1">${blogPost.description}</p>
+            <a href="./detail_blog.html?id=${blogPost.id}" class="btn btn-sm btn-primary btn-readmore">
+              <i class="fa fa-book me-1"></i>
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ===== GENERATE LATEST BLOG =====
+function generateLatestBlogHTML(blogPost) {
+  return `
+    <a href="./detail_blog.html?id=${blogPost.id}" class="latest-blog-item">
+      <p>${blogPost.title}</p>
+      <div class="blog-date d-flex mt-1">
+        <i class="fa fa-calendar me-2 mt-1"></i>
+        <p>${blogPost.date}</p>
+      </div>
+      <hr>
+    </a>
+  `;
+}
+
+// ===== RENDER BLOGS =====
+function renderBlogPosts(filteredBlogData = [], isFiltered = false) {
+  const blogContainer = document.getElementById('blogContainer');
+  const latestBlogContent = document.getElementById('latestBlogContent');
+
+  if (latestBlogContent) {
+    latestBlogContent.innerHTML = '';
+    const lastTwoBlogPosts = blogData.slice(-2);
+    lastTwoBlogPosts.forEach(blogPost => {
+      latestBlogContent.innerHTML += generateLatestBlogHTML(blogPost);
+    });
+  }
+
+  if (!blogContainer) return;
+
+  blogContainer.innerHTML = '';
+
+  const dataToRender = isFiltered ? filteredBlogData : blogData;
+
+  if (isFiltered && dataToRender.length === 0) {
+    const emptyStateDiv = document.createElement('div');
+    emptyStateDiv.textContent = "No blog posts available.";
+    blogContainer.appendChild(emptyStateDiv);
+    return;
+  }
+
+  dataToRender.forEach(blogPost => {
+    blogContainer.innerHTML += generateBlogHTML(blogPost);
+  });
+}
+
+// ===== SEARCH BLOG =====
+function searchBlog(input) {
+  const searchTerm = input.value.toLowerCase();
+  const filteredBlogData = blogData.filter(blogPost =>
+    blogPost.title.toLowerCase().includes(searchTerm) ||
+    blogPost.description.toLowerCase().includes(searchTerm)
+  );
+
+  renderBlogPosts(filteredBlogData, searchTerm !== '');
+}
+
+// ===== ON LOAD PAGE =====
+window.onload = function () {
+  renderBlogPosts();
+  renderBlogDetailFromQuery();
+};
+
+// ===== GET BLOG BY ID =====
+function getBlogById(blogId) {
+  return blogData.find(blog => blog.id === blogId) || null;
+}
+
+// ===== LOAD BLOG DETAIL =====
+function renderBlogDetailFromQuery() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const idBlogValue = searchParams.get('id');
+
+  if (idBlogValue) {
+    const selectedBlog = getBlogById(parseInt(idBlogValue, 10));
+    if (selectedBlog) {
+      const img = document.getElementById("cardDetailImg");
+      const tgl = document.getElementById("tgl-blog");
+      const title = document.getElementById("title-blog");
+      const frame = document.getElementById("cardDetailBlog");
+
+      if (img) img.src = selectedBlog.image_blog;
+      if (tgl) tgl.innerText = selectedBlog.date;
+      if (title) title.innerText = selectedBlog.title;
+      if (frame) frame.src = selectedBlog.detail_blog;
+    } else {
+      console.error("Error: Blog post not found for id: " + idBlogValue);
+    }
   }
 }
